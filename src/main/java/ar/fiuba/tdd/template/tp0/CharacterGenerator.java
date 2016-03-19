@@ -10,7 +10,7 @@ public class CharacterGenerator {
         StringBuffer buf = new StringBuffer();
         int quantity = QuantityIdentifier.getQuantity();
         for (int iterate = 0; iterate < quantity; iterate++) {
-            if(CharacterIdentifier.isAnyCharacter()) {
+            if (CharacterIdentifier.isAnyCharacter()) {
                 buf.append(generateAnyCharacter());
             } else if (CharacterIdentifier.isLiteral()) {
                 buf.append(generateLiteral());

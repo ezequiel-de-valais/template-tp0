@@ -1,7 +1,5 @@
 package ar.fiuba.tdd.template.tp0;
 
-import ar.fiuba.tdd.template.tp0.quantifier.NoneMultiplier;
-import ar.fiuba.tdd.template.tp0.quantifier.ZeroOrNoneMultiplier;
 
 import java.util.ArrayList;
 import java.util.List;
