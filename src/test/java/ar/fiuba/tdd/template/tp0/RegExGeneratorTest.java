@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class RegExGeneratorTest {
@@ -32,8 +33,16 @@ public class RegExGeneratorTest {
         assertTrue(validate(".", 1));
     }
 
-    //TODO: Uncomment these tests
-    /*
+    @Test
+    public void resultNumber() {
+        RegExGenerator generator = new RegExGenerator();
+        List<String> results;
+        results = generator.generate(".", 2);
+        assertEquals(results.size(), 2 );
+        results = generator.generate("..", 5);
+        assertEquals(results.size(), 5 );
+    }
+
     @Test
     public void testMultipleCharacters() {
         assertTrue(validate("...", 1));
@@ -44,6 +53,8 @@ public class RegExGeneratorTest {
         assertTrue(validate("\\@", 1));
     }
 
+    //TODO: Uncomment these tests
+    /*
     @Test
     public void testLiteralDotCharacter() {
         assertTrue(validate("\\@..", 1));

@@ -1,5 +1,9 @@
 package ar.fiuba.tdd.template.tp0;
 
+import ar.fiuba.tdd.template.tp0.CharacterGenerator.AnyCaracter;
+import ar.fiuba.tdd.template.tp0.CharacterGenerator.Literal;
+import ar.fiuba.tdd.template.tp0.Quantifier.NoneMultiplier;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +15,6 @@ public class RegExGenerator {
     //    this.maxLength = maxLength;
     //}
 
-    // TODO: Uncomment parameters
     public List<String> generate(String regEx, int numberOfResults) {
         Expression expression = new Expression(regEx);
         int iterator;
@@ -26,12 +29,18 @@ public class RegExGenerator {
         StringBuffer buf = new StringBuffer();
 
         while (regEx.hasNext()) {
-            if (AnyCaracter.match(regEx)) {
+
+            if (Literal.match(regEx)) {
+                Literal.shift(regEx);
+                int multiplier = getMultiplier(regEx);
+                buf.append(Literal.solve(multiplier));
+            }else if (AnyCaracter.match(regEx)) {
                 AnyCaracter.shift(regEx);
                 int multiplier = getMultiplier(regEx);
                 buf.append(AnyCaracter.solve(multiplier));
             }
         }
+        regEx.refresh();
         return buf.toString();
     }
 
