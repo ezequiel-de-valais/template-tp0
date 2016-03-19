@@ -1,8 +1,6 @@
-package ar.fiuba.tdd.template.tp0.CharacterGenerator;
+package ar.fiuba.tdd.template.tp0.character.enerator;
 
 import ar.fiuba.tdd.template.tp0.Expression;
-
-import java.util.Random;
 
 /**
  * Created by ezequiel on 18/03/16.

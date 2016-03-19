@@ -1,4 +1,4 @@
-package ar.fiuba.tdd.template.tp0.CharacterGenerator;
+package ar.fiuba.tdd.template.tp0.character.enerator;
 
 import ar.fiuba.tdd.template.tp0.Expression;
 
@@ -8,8 +8,12 @@ import java.util.Random;
  * Created by ezequiel on 18/03/16.
  */
 public class AnyCaracter {
+
     public static boolean match(Expression regEx) {
-        return true;
+        if (regEx.getChar(0).equals(".")) {
+            return true;
+        }
+        return false;
     }
 
     public static void shift(Expression regEx) {
@@ -26,7 +30,7 @@ public class AnyCaracter {
 
     private static String randomCharacter() {
         Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(256);
+        int randomInt = randomGenerator.nextInt(126 - 32) + 32;
         return Character.toString((char) randomInt);
     }
 }

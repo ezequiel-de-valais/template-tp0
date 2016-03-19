@@ -1,4 +1,4 @@
-package ar.fiuba.tdd.template.tp0.Quantifier;
+package ar.fiuba.tdd.template.tp0.quantifier;
 
 import ar.fiuba.tdd.template.tp0.Expression;
 

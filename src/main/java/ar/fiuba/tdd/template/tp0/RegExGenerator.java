@@ -1,8 +1,10 @@
 package ar.fiuba.tdd.template.tp0;
 
-import ar.fiuba.tdd.template.tp0.CharacterGenerator.AnyCaracter;
-import ar.fiuba.tdd.template.tp0.CharacterGenerator.Literal;
-import ar.fiuba.tdd.template.tp0.Quantifier.NoneMultiplier;
+import ar.fiuba.tdd.template.tp0.character.enerator.AnyCaracter;
+import ar.fiuba.tdd.template.tp0.character.enerator.Literal;
+import ar.fiuba.tdd.template.tp0.character.enerator.SimpleCharacter;
+import ar.fiuba.tdd.template.tp0.quantifier.NoneMultiplier;
+import ar.fiuba.tdd.template.tp0.quantifier.ZeroOrNoneMultiplier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,21 +36,26 @@ public class RegExGenerator {
                 Literal.shift(regEx);
                 int multiplier = getMultiplier(regEx);
                 buf.append(Literal.solve(multiplier));
-            }else if (AnyCaracter.match(regEx)) {
+            } else if (AnyCaracter.match(regEx)) {
                 AnyCaracter.shift(regEx);
                 int multiplier = getMultiplier(regEx);
                 buf.append(AnyCaracter.solve(multiplier));
+            } else if (SimpleCharacter.match(regEx)) {
+                SimpleCharacter.shift(regEx);
+                int multiplier = getMultiplier(regEx);
+                buf.append(SimpleCharacter.solve(multiplier));
             }
+
         }
         regEx.refresh();
         return buf.toString();
     }
 
     private int getMultiplier(Expression regEx) {
-        if (NoneMultiplier.match(regEx)) {
+        if (ZeroOrNoneMultiplier.match(regEx)) {
+            return ZeroOrNoneMultiplier.getMultiplier();
+        } else {
             return NoneMultiplier.getMultiplier();
         }
-
-        return 0;
     }
 }
