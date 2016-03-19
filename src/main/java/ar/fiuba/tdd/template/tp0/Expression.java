@@ -33,4 +33,10 @@ public class Expression {
         return EMPTY_STRING;
     }
 
+    public String cutUpTo(String limit) {
+        int position = expression.indexOf(limit);
+        String substring  = expression.substring(0, position + 1);
+        shift(position + 1);
+        return substring;
+    }
 }

@@ -1,6 +1,7 @@
 package ar.fiuba.tdd.template.tp0;
 
 import java.util.Random;
+import java.util.StringJoiner;
 
 /**
  * Created by ezequiel on 19/03/16.
@@ -14,11 +15,21 @@ public class CharacterGenerator {
                 buf.append(generateAnyCharacter());
             } else if (CharacterIdentifier.isLiteral()) {
                 buf.append(generateLiteral());
+            } else if (CharacterIdentifier.isGroup()) {
+                buf.append(generateGroup());
             } else if (CharacterIdentifier.isSimpleCharacter()) {
                 buf.append(generateSimpleCharacter());
             }
         }
         return buf.toString();
+    }
+
+    private static String generateGroup() {
+        String group = CharacterIdentifier.getActualString();
+        String parts = group.substring(1, group.length() - 1);
+        Random randomGenerator = new Random();
+        int position = randomGenerator.nextInt(parts.length());
+        return Character.toString(parts.charAt(position));
     }
 
     private static String generateSimpleCharacter() {
