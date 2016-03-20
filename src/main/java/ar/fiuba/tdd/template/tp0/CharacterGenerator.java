@@ -1,8 +1,14 @@
 package ar.fiuba.tdd.template.tp0;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CharacterGenerator {
+
+
     public static String generate() {
         StringBuffer buf = new StringBuffer();
         int quantity = QuantityIdentifier.getQuantity();
@@ -37,8 +43,50 @@ public class CharacterGenerator {
     }
 
     private static String generateAnyCharacter() {
-        Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(126 - 32) + 32;
-        return Character.toString((char) randomInt);
+        boolean valid = false;
+        Random randomGenerator;
+        int randomInt;
+        String result = "";
+
+        while (!valid) {
+            randomGenerator = new Random();
+            randomInt = randomGenerator.nextInt(255);
+            result = Character.toString((char) randomInt);
+            valid = validate(result);
+        }
+
+
+
+        return result;
     }
+
+    private static boolean validate(String result) {
+        try {
+            ArrayList<String> invalidChars = getInvalidChars();
+            if (invalidChars.contains(result)) {
+                return false;
+            }
+            Pattern pattern = Pattern.compile("^" + result + "$");
+            Matcher matcher = pattern.matcher(result);
+            boolean solution = matcher.find();
+
+            if (solution == false) {
+                solution = false;
+            }
+            return solution;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private static ArrayList<String> getInvalidChars() {
+        ArrayList<String> characters = new ArrayList<String>();
+        characters.add("\n");
+        characters.add("\t");
+        characters.add("\r");
+        characters.add(Character.toString((char) 133));
+        return characters;
+    }
+
+
 }

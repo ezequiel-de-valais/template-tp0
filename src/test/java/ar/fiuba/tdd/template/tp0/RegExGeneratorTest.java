@@ -19,12 +19,18 @@ public class RegExGeneratorTest {
         List<String> results = generator.generate(regEx, numberOfResults);
         // force matching the beginning and the end of the strings
         Pattern pattern = Pattern.compile("^" + regEx + "$");
+
         return results
                 .stream()
                 .reduce(true,
                     (acc, item) -> {
                         Matcher matcher = pattern.matcher(item);
-                        return  acc && matcher.find();
+                        boolean solution = acc && matcher.find();
+                        if (!solution) {
+                            solution = false;
+                        }
+                        return  solution;
+
                     },
                     (item1, item2) -> item1 && item2);
     }
