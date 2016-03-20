@@ -25,11 +25,6 @@ public class RegExGeneratorTest {
                     (acc, item) -> {
                         Matcher matcher = pattern.matcher(item);
                         return  acc && matcher.find();
-                        /*boolean solution =  acc && matcher.find();
-                        if(!solution) {
-                            solution = false;
-                        }
-                        return solution;*/
                     },
                     (item1, item2) -> item1 && item2);
     }
