@@ -1,8 +1,6 @@
 package ar.fiuba.tdd.template.tp0;
 
-/**
- * Created by ezequiel on 18/03/16.
- */
+
 public class Expression {
     private static final String EMPTY_STRING = "";
     private final String saveExpression;

@@ -1,11 +1,7 @@
 package ar.fiuba.tdd.template.tp0;
 
 import java.util.Random;
-import java.util.StringJoiner;
 
-/**
- * Created by ezequiel on 19/03/16.
- */
 public class CharacterGenerator {
     public static String generate() {
         StringBuffer buf = new StringBuffer();
