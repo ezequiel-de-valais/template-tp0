@@ -85,5 +85,9 @@ public class RegExGeneratorTest {
     public void testCharacterSetWithQuantifiersCeroOrLot() {
         assertTrue(validate("[abc]*", repetitions));
     }
-    // TODO: Add more tests!!!
+
+    @Test
+    public void testComplexRegExp() {
+        assertTrue(validate("..+[ab]*d?c", repetitions));
+    }
 }
