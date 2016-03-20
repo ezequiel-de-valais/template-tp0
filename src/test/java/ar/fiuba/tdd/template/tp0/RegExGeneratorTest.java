@@ -25,12 +25,7 @@ public class RegExGeneratorTest {
                 .reduce(true,
                     (acc, item) -> {
                         Matcher matcher = pattern.matcher(item);
-                        boolean solution = acc && matcher.find();
-                        if (!solution) {
-                            solution = false;
-                        }
-                        return  solution;
-
+                        return acc && matcher.find();
                     },
                     (item1, item2) -> item1 && item2);
     }
