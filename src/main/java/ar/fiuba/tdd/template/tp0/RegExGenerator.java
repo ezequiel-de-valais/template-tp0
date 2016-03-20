@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegExGenerator {
-    // TODO: Uncomment this field
-    //private int maxLength;
 
-    //public RegExGenerator(int maxLength) {
-    //    this.maxLength = maxLength;
-    //}
+    public RegExGenerator(int maxLength) {
+        QuantityIdentifier.setLimitRandom(maxLength);
+    }
 
     public List<String> generate(String regEx, int numberOfResults) {
         Expression expression = new Expression(regEx);

@@ -12,9 +12,10 @@ import static org.junit.Assert.assertTrue;
 public class RegExGeneratorTest {
 
     private final int repetitions = 300;
+    private final int limit = 10;
 
     private boolean validate(String regEx, int numberOfResults) {
-        RegExGenerator generator = new RegExGenerator();
+        RegExGenerator generator = new RegExGenerator(limit);
         List<String> results = generator.generate(regEx, numberOfResults);
         // force matching the beginning and the end of the strings
         Pattern pattern = Pattern.compile("^" + regEx + "$");
@@ -41,12 +42,27 @@ public class RegExGeneratorTest {
 
     @Test
     public void resultNumber() {
-        RegExGenerator generator = new RegExGenerator();
+        RegExGenerator generator = new RegExGenerator(limit);
         List<String> results;
         results = generator.generate(".", 2);
         assertEquals(results.size(), 2 );
         results = generator.generate("..", 5);
         assertEquals(results.size(), 5 );
+    }
+
+    @Test
+    public void resultLengthFixesToLimit() {
+        int limit = 5;
+        RegExGenerator generator = new RegExGenerator(limit);
+        List<String> results;
+        results = generator.generate(".*", 100);
+        boolean solution = true;
+        for (String result : results) {
+            if (result.length() > (limit - 1)) {
+                solution = false;
+            }
+        }
+        assertTrue(solution);
     }
 
     @Test

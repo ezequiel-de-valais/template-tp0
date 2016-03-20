@@ -5,7 +5,7 @@ import java.util.Random;
 public class QuantityIdentifier {
 
     private static int quantity;
-    private static int random_limit = 10;
+    private static int limitRandom = 10;
 
 
     public static void identify(Expression regEx) {
@@ -16,11 +16,11 @@ public class QuantityIdentifier {
         } else if (regEx.getChar(0).equals("+")) {
             regEx.shift(1);
             Random randomGenerator = new Random();
-            quantity = randomGenerator.nextInt(random_limit) + 1;
+            quantity = randomGenerator.nextInt(limitRandom) + 1;
         } else if (regEx.getChar(0).equals("*")) {
             regEx.shift(1);
             Random randomGenerator = new Random();
-            quantity = randomGenerator.nextInt(random_limit);
+            quantity = randomGenerator.nextInt(limitRandom);
         } else {
             quantity = 1;
         }
@@ -28,5 +28,9 @@ public class QuantityIdentifier {
 
     public static int getQuantity() {
         return quantity;
+    }
+
+    public static void setLimitRandom(int limitRandom) {
+        QuantityIdentifier.limitRandom = limitRandom;
     }
 }
