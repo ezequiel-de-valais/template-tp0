@@ -8,12 +8,22 @@ import java.util.Random;
 public class QuantityIdentifier {
 
     private static int quantity;
+    private static int random_limit = 10;
+
 
     public static void identify(Expression regEx) {
         if (regEx.getChar(0).equals("?")) {
             regEx.shift(1);
             Random randomGenerator = new Random();
-            quantity =  randomGenerator.nextInt(2);
+            quantity = randomGenerator.nextInt(2);
+        } else if (regEx.getChar(0).equals("+")) {
+            regEx.shift(1);
+            Random randomGenerator = new Random();
+            quantity = randomGenerator.nextInt(random_limit) + 1;
+        } else if (regEx.getChar(0).equals("*")) {
+            regEx.shift(1);
+            Random randomGenerator = new Random();
+            quantity = randomGenerator.nextInt(random_limit);
         } else {
             quantity = 1;
         }

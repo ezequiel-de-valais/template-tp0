@@ -75,11 +75,15 @@ public class RegExGeneratorTest {
     public void testCharacterSet() {
         assertTrue(validate("[abc]", repetitions));
     }
-/*
+
     @Test
     public void testCharacterSetWithQuantifiers() {
-        assertTrue(validate("[abc]+", 1));
-    }*/
+        assertTrue(validate("[abc]+", repetitions));
+    }
 
+    @Test
+    public void testCharacterSetWithQuantifiersCeroOrLot() {
+        assertTrue(validate("[abc]*", repetitions));
+    }
     // TODO: Add more tests!!!
 }
