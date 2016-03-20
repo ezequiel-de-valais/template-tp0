@@ -11,10 +11,10 @@ import static org.junit.Assert.assertTrue;
 
 public class RegExGeneratorTest {
 
-    private final int repetitions = 300;
+    private final int repetitions = 100;
     private final int limit = 10;
 
-    private boolean validate(String regEx, int numberOfResults) {
+    private boolean validate(String regEx, int numberOfResults) throws PatternError {
         RegExGenerator generator = new RegExGenerator(limit);
         List<String> results = generator.generate(regEx, numberOfResults);
         // force matching the beginning and the end of the strings
@@ -37,12 +37,12 @@ public class RegExGeneratorTest {
 
 
     @Test
-    public void testAnyCharacter() {
+    public void testAnyCharacter() throws PatternError {
         assertTrue(validate(".", repetitions));
     }
 
     @Test
-    public void resultNumber() {
+    public void resultNumber() throws PatternError {
         RegExGenerator generator = new RegExGenerator(limit);
         List<String> results;
         results = generator.generate(".", 2);
@@ -52,7 +52,7 @@ public class RegExGeneratorTest {
     }
 
     @Test
-    public void resultLengthFixesToLimit() {
+    public void resultLengthFixesToLimit() throws PatternError {
         int limit = 5;
         RegExGenerator generator = new RegExGenerator(limit);
         List<String> results;
@@ -67,44 +67,54 @@ public class RegExGeneratorTest {
     }
 
     @Test
-    public void testMultipleCharacters() {
+    public void testMultipleCharacters() throws PatternError {
         assertTrue(validate("...", repetitions));
     }
 
     @Test
-    public void testLiteral() {
+    public void testLiteral() throws PatternError {
         assertTrue(validate("\\@", repetitions));
     }
 
     @Test
-    public void testLiteralDotCharacter() {
+    public void testLiteralDotCharacter() throws PatternError {
         assertTrue(validate("\\@..", repetitions));
     }
 
 
     @Test
-    public void testZeroOrOneCharacter() {
+    public void testZeroOrOneCharacter() throws PatternError {
         assertTrue(validate("\\@.h?", repetitions));
     }
 
 
     @Test
-    public void testCharacterSet() {
+    public void testCharacterSet() throws PatternError {
         assertTrue(validate("[abc]", repetitions));
     }
 
     @Test
-    public void testCharacterSetWithQuantifiers() {
+    public void testCharacterSetWithQuantifiers() throws PatternError {
         assertTrue(validate("[abc]+", repetitions));
     }
 
     @Test
-    public void testCharacterSetWithQuantifiersCeroOrLot() {
+    public void testCharacterSetWithQuantifiersCeroOrLot() throws PatternError {
         assertTrue(validate("[abc]*", repetitions));
     }
 
     @Test
-    public void testComplexRegExp() {
+    public void testComplexRegExp() throws PatternError {
         assertTrue(validate("..+[ab]*d?c", repetitions));
+    }
+
+    @Test(expected = PatternError.class)
+    public void testPatternError() throws PatternError {
+        validate("[ab+cd]", repetitions);
+    }
+
+    @Test
+    public void testPatternEscapedInGroup() throws PatternError {
+        assertTrue(validate("[ab\\+cd]", repetitions));
     }
 }

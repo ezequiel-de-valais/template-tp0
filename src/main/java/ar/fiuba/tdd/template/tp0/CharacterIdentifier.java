@@ -10,7 +10,7 @@ public class CharacterIdentifier {
     private static boolean isGroup;
     private static String actualString;
 
-    public static void identify(Expression regEx) {
+    public static void identify(Expression regEx) throws PatternError {
         clearFlags();
         if (regEx.getChar(0).equals(".")) {
             isAnyCharacter = true;
@@ -20,7 +20,7 @@ public class CharacterIdentifier {
             actualString = regEx.getChar(1);
             regEx.shift(2);
         } else if (regEx.getChar(0).equals("[")) {
-            actualString = regEx.cutUpTo("]");
+            actualString = regEx.cutBrackets();
             isGroup = true;
         } else {
             isSimpleCharacter = true;

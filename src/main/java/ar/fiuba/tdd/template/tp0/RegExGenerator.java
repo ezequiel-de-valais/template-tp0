@@ -10,7 +10,7 @@ public class RegExGenerator {
         QuantityIdentifier.setLimitRandom(maxLength);
     }
 
-    public List<String> generate(String regEx, int numberOfResults) {
+    public List<String> generate(String regEx, int numberOfResults) throws PatternError {
         Expression expression = new Expression(regEx);
         int iterator;
         ArrayList<String> list = new ArrayList<>();
@@ -20,7 +20,7 @@ public class RegExGenerator {
         return list;
     }
 
-    private String generateAnExp(Expression regEx) {
+    private String generateAnExp(Expression regEx) throws PatternError {
         StringBuffer buf = new StringBuffer();
         while (regEx.hasNext()) {
             CharacterIdentifier.identify(regEx);

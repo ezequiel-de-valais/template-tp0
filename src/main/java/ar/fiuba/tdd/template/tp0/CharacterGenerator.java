@@ -1,7 +1,6 @@
 package ar.fiuba.tdd.template.tp0;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,10 +27,9 @@ public class CharacterGenerator {
 
     private static String generateGroup() {
         String group = CharacterIdentifier.getActualString();
-        String parts = group.substring(1, group.length() - 1);
         Random randomGenerator = new Random();
-        int position = randomGenerator.nextInt(parts.length());
-        return Character.toString(parts.charAt(position));
+        int position = randomGenerator.nextInt(group.length());
+        return Character.toString(group.charAt(position));
     }
 
     private static String generateSimpleCharacter() {
